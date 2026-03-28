@@ -9,13 +9,13 @@ export function Solution() {
         <h2 className="section-title">Annotate once, let AI understand</h2>
         <p className="section-subtitle" style={{ marginBottom: '2.5rem' }}>
           Add semantic metadata to your React components with simple hooks.
-          ui-llm builds a live manifest that LLMs can read, query, and act upon.
+          seam-ui builds a live manifest that LLMs can read, query, and act upon.
         </p>
 
         <div className="grid-2">
           <div>
             <CodeBlock filename="SettingsPage.tsx">
-{`<span class="hl-kw">import</span> { <span class="hl-fn">useLLMAction</span>, <span class="hl-fn">useLLMInput</span> } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/react'</span>;
+{`<span class="hl-kw">import</span> { <span class="hl-fn">useLLMAction</span>, <span class="hl-fn">useLLMInput</span> } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/react'</span>;
 
 <span class="hl-kw">function</span> <span class="hl-fn">SettingsPage</span>() {
   <span class="hl-kw">const</span> [name, setName] = useState(<span class="hl-str">'Alice'</span>);

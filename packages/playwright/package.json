@@ -1,7 +1,7 @@
 {
-  "name": "@ui-llm/playwright",
+  "name": "@seam-ui/playwright",
   "version": "0.1.0",
-  "description": "Playwright integration for ui-llm natural language testing",
+  "description": "Playwright integration for seam-ui natural language testing",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -21,7 +21,7 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@ui-llm/core": "workspace:*"
+    "@seam-ui/core": "workspace:*"
   },
   "peerDependencies": {
     "@playwright/test": ">=1.40.0"

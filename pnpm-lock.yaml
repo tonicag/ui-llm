@@ -22,10 +22,10 @@ importers:
 
   packages/example:
     dependencies:
-      '@ui-llm/core':
+      '@seam-ui/core':
         specifier: workspace:*
         version: link:../core
-      '@ui-llm/react':
+      '@seam-ui/react':
         specifier: workspace:*
         version: link:../react
       react:
@@ -38,15 +38,15 @@ importers:
       '@playwright/test':
         specifier: ^1.49.0
         version: 1.58.2
+      '@seam-ui/playwright':
+        specifier: workspace:*
+        version: link:../playwright
       '@types/react':
         specifier: ^18.2.0
         version: 18.3.28
       '@types/react-dom':
         specifier: ^18.2.0
         version: 18.3.7(@types/react@18.3.28)
-      '@ui-llm/playwright':
-        specifier: workspace:*
-        version: link:../playwright
       '@vitejs/plugin-react':
         specifier: ^4.2.0
         version: 4.7.0(vite@5.4.21(@types/node@25.5.0))
@@ -84,7 +84,7 @@ importers:
 
   packages/playwright:
     dependencies:
-      '@ui-llm/core':
+      '@seam-ui/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -103,7 +103,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@ui-llm/core':
+      '@seam-ui/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

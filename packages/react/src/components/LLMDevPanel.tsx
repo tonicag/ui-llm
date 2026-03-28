@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { LLMContext } from '../context';
-import type { LLMEntry, LLMActionEntry, LLMInputEntry } from '@ui-llm/core';
-import { UI_LLM_DATA_ATTRIBUTE } from '@ui-llm/core';
+import type { LLMEntry, LLMActionEntry, LLMInputEntry } from '@seam-ui/core';
+import { SEAM_DATA_ATTRIBUTE } from '@seam-ui/core';
 
 interface HighlightOverlay {
   top: number;
@@ -58,7 +58,7 @@ export function LLMDevPanel({
   });
 
   const handleHighlight = useCallback((entry: LLMEntry) => {
-    const el = document.querySelector(`[${UI_LLM_DATA_ATTRIBUTE}="${entry.dataAttribute}"]`);
+    const el = document.querySelector(`[${SEAM_DATA_ATTRIBUTE}="${entry.dataAttribute}"]`);
     if (el) {
       const rect = el.getBoundingClientRect();
       setHighlight({
@@ -100,7 +100,7 @@ export function LLMDevPanel({
           fontSize: '12px',
         }}
       >
-        ui-llm ({entries.length})
+        seam-ui ({entries.length})
       </button>
     );
   }
@@ -154,7 +154,7 @@ export function LLMDevPanel({
           }}
         >
           <span style={{ fontWeight: 'bold', color: '#4a4aff' }}>
-            ui-llm DevPanel
+            seam-ui DevPanel
           </span>
           <div style={{ display: 'flex', gap: '6px' }}>
             <button

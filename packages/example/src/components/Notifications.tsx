@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLLMAction, LLMScope } from '@ui-llm/react';
+import { useLLMAction, LLMScope } from '@seam-ui/react';
 import type { Notification } from '../App';
 
 interface NotificationsProps {

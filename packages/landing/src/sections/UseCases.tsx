@@ -6,7 +6,7 @@ const cases = [
     id: 'testing',
     label: 'NL Testing',
     desc: 'Write Playwright tests in English. The LLM resolves your instructions against the live manifest and executes them. No fragile selectors.',
-    code: `<span class="hl-kw">import</span> { test, expect } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+    code: `<span class="hl-kw">import</span> { test, expect } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/playwright'</span>;
 
 test(<span class="hl-str">'checkout flow'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
   <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000/shop'</span>);
@@ -77,7 +77,7 @@ test(<span class="hl-str">'checkout flow'</span>, <span class="hl-kw">async</spa
 <span class="hl-kw">await</span> llm.<span class="hl-fn">invoke</span>(<span class="hl-str">'Set Theme'</span>, { <span class="hl-prop">theme</span>: <span class="hl-str">'dark'</span> });
 
 <span class="hl-cmt">// Or directly via the protocol:</span>
-window.__ui_llm__.<span class="hl-fn">execute</span>(entryId, {
+window.__seam__.<span class="hl-fn">execute</span>(entryId, {
   <span class="hl-prop">operation</span>: <span class="hl-str">'invoke'</span>,
   <span class="hl-prop">params</span>: { <span class="hl-prop">theme</span>: <span class="hl-str">'dark'</span> },
 });`,
@@ -88,7 +88,7 @@ window.__ui_llm__.<span class="hl-fn">execute</span>(entryId, {
     label: 'AI Agents',
     desc: 'Autonomous agents can discover what your UI offers, understand state, and take actions through a structured protocol instead of scraping.',
     code: `<span class="hl-cmt">// Agent reads the manifest</span>
-<span class="hl-kw">const</span> manifest = window.__ui_llm__.<span class="hl-fn">getManifest</span>();
+<span class="hl-kw">const</span> manifest = window.__seam__.<span class="hl-fn">getManifest</span>();
 
 <span class="hl-cmt">// Knows what pages exist</span>
 manifest.routes
@@ -103,14 +103,14 @@ manifest.entries.<span class="hl-fn">filter</span>(e => e.kind === <span class="
 <span class="hl-cmt">// [{ name: 'Email', currentValue: 'alice@co.com' }]</span>
 
 <span class="hl-cmt">// Executes and gets structured feedback</span>
-<span class="hl-kw">const</span> result = <span class="hl-kw">await</span> window.__ui_llm__.<span class="hl-fn">execute</span>(id, {
+<span class="hl-kw">const</span> result = <span class="hl-kw">await</span> window.__seam__.<span class="hl-fn">execute</span>(id, {
   <span class="hl-prop">operation</span>: <span class="hl-str">'invoke'</span>,
   <span class="hl-prop">params</span>: { <span class="hl-prop">enabled</span>: <span class="hl-num">true</span> },
 });
 <span class="hl-cmt">// { status: 'success', sideEffects: [...] }</span>
 
 <span class="hl-cmt">// Subscribes to live state changes</span>
-window.__ui_llm__.<span class="hl-fn">subscribe</span>(<span class="hl-str">'*'</span>, (event) => {
+window.__seam__.<span class="hl-fn">subscribe</span>(<span class="hl-str">'*'</span>, (event) => {
   console.log(event.type, event.entryId);
 });`,
     filename: 'agent.ts',
@@ -155,7 +155,7 @@ export function UseCases() {
         <span className="section-label">Use Cases</span>
         <h2 className="section-title">Built for every LLM interaction</h2>
         <p className="section-subtitle" style={{ marginBottom: '2rem' }}>
-          From testing to autonomous agents, ui-llm provides the semantic foundation.
+          From testing to autonomous agents, seam-ui provides the semantic foundation.
         </p>
 
         <div className="use-case-tabs" style={{ display: 'flex', gap: '0.5rem', marginBottom: '1.5rem', flexWrap: 'wrap' }}>

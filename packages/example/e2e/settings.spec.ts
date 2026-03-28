@@ -1,4 +1,4 @@
-import { test, expect } from '@ui-llm/playwright';
+import { test, expect } from '@seam-ui/playwright';
 
 test.use({
   llmConfig: {
@@ -15,7 +15,7 @@ test.use({
 
 test('manifest is exposed on window', async ({ page }) => {
   await page.goto('/');
-  const manifest = await page.evaluate(() => window.__ui_llm__?.getManifest());
+  const manifest = await page.evaluate(() => window.__seam__?.getManifest());
 
   expect(manifest).toBeDefined();
   expect(manifest!.version).toBe('1.0.0');
@@ -31,7 +31,7 @@ test('meta tag is injected for discovery', async ({ page, llm }) => {
 
 test('manifest includes routes and capabilities', async ({ page }) => {
   await page.goto('/');
-  const manifest = await page.evaluate(() => window.__ui_llm__?.getManifest());
+  const manifest = await page.evaluate(() => window.__seam__?.getManifest());
 
   expect(manifest!.routes).toBeDefined();
   expect(manifest!.routes!.length).toBe(4);

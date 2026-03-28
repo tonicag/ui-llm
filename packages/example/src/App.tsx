@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
-import { LLMProvider, LLMScope, LLMDevPanel } from '@ui-llm/react';
-import type { LLMRoute, LLMCurrentRoute, LLMCapabilities } from '@ui-llm/core';
+import { LLMProvider, LLMScope, LLMDevPanel } from '@seam-ui/react';
+import type { LLMRoute, LLMCurrentRoute, LLMCapabilities } from '@seam-ui/core';
 import { NavBar } from './components/NavBar';
 import { Notifications } from './components/Notifications';
 import { SearchOverlay } from './components/SearchOverlay';

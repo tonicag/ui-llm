@@ -14,7 +14,7 @@ import type {
   LLMRoute,
   LLMCurrentRoute,
   LLMCapabilities,
-} from '@ui-llm/core';
+} from '@seam-ui/core';
 
 export class LLMRegistry {
   private entries = new Map<EntryId, LLMEntry>();
@@ -62,7 +62,7 @@ export class LLMRegistry {
   private validateEntry(entry: LLMEntry): void {
     if (!entry.descriptor.description) {
       console.warn(
-        `[ui-llm] Entry "${entry.descriptor.name}" (${entry.id}) has no description. ` +
+        `[seam-ui] Entry "${entry.descriptor.name}" (${entry.id}) has no description. ` +
         `LLMs rely on descriptions to understand what elements do.`
       );
     }
@@ -75,7 +75,7 @@ export class LLMRegistry {
         existing.id !== entry.id
       ) {
         console.warn(
-          `[ui-llm] Duplicate name "${entry.descriptor.name}" in scope [${scopeKey || 'root'}]. ` +
+          `[seam-ui] Duplicate name "${entry.descriptor.name}" in scope [${scopeKey || 'root'}]. ` +
           `This can confuse LLMs when resolving actions. ` +
           `Consider using unique names or different scopes.`
         );
@@ -85,7 +85,7 @@ export class LLMRegistry {
 
     if (entry.kind === 'input' && entry.currentValue === undefined) {
       console.warn(
-        `[ui-llm] Input "${entry.descriptor.name}" (${entry.id}) has no value. ` +
+        `[seam-ui] Input "${entry.descriptor.name}" (${entry.id}) has no value. ` +
         `Pass a \`value\` prop to useLLMInput for accurate state tracking.`
       );
     }

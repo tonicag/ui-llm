@@ -1,6 +1,6 @@
 import type { Page } from '@playwright/test';
-import type { LLMBridgeAction, ExecutionResult } from '@ui-llm/core';
-import { UI_LLM_DATA_ATTRIBUTE, UI_LLM_WINDOW_KEY } from '@ui-llm/core';
+import type { LLMBridgeAction, ExecutionResult } from '@seam-ui/core';
+import { SEAM_DATA_ATTRIBUTE, SEAM_WINDOW_KEY } from '@seam-ui/core';
 
 export class ActionExecutionError extends Error {
   constructor(
@@ -16,7 +16,7 @@ export class ActionExecutionError extends Error {
 export class ActionExecutor {
   constructor(private page: Page) {}
 
-  /** Attempt bridge-level execution via window.__ui_llm__.execute() */
+  /** Attempt bridge-level execution via window.__seam__.execute() */
   async executeBridge(action: LLMBridgeAction): Promise<ExecutionResult | null> {
     const result = await this.page.evaluate(
       ({ key, entryId, operation, value, params }: {
@@ -31,7 +31,7 @@ export class ActionExecutor {
         return bridge.execute(entryId, { operation, value, params });
       },
       {
-        key: UI_LLM_WINDOW_KEY,
+        key: SEAM_WINDOW_KEY,
         entryId: action.entryId,
         operation: action.operation,
         value: action.value,
@@ -64,7 +64,7 @@ export class ActionExecutor {
     }
 
     // Fallback to DOM-based execution
-    const selector = `[${UI_LLM_DATA_ATTRIBUTE}="${action.entryId}"]`;
+    const selector = `[${SEAM_DATA_ATTRIBUTE}="${action.entryId}"]`;
     const locator = this.page.locator(selector);
 
     try {

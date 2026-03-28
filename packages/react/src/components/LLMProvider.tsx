@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef } from 'react';
 import { LLMContext, type LLMContextValue } from '../context';
 import { LLMRegistry } from '../registry';
-import type { LLMRoute, LLMCurrentRoute, LLMCapabilities } from '@ui-llm/core';
-import { UI_LLM_WINDOW_KEY, UI_LLM_VERSION, UI_LLM_META_NAME, UI_LLM_PROTOCOL_VERSION } from '@ui-llm/core';
+import type { LLMRoute, LLMCurrentRoute, LLMCapabilities } from '@seam-ui/core';
+import { SEAM_WINDOW_KEY, SEAM_VERSION, SEAM_META_NAME, SEAM_PROTOCOL_VERSION } from '@seam-ui/core';
 
 export interface LLMProviderProps {
   children: React.ReactNode;
@@ -12,7 +12,7 @@ export interface LLMProviderProps {
    */
   enabled?: boolean;
   /**
-   * Expose the manifest on `window.__ui_llm__` for Playwright.
+   * Expose the manifest on `window.__seam__` for Playwright.
    * Defaults to true when enabled is true.
    */
   exposeOnWindow?: boolean;
@@ -42,13 +42,13 @@ export function LLMProvider({
     [enabled]
   );
 
-  // Discovery: inject <meta name="ui-llm"> tag
+  // Discovery: inject <meta name="seam-ui"> tag
   useEffect(() => {
     if (!enabled) return;
 
     const meta = document.createElement('meta');
-    meta.name = UI_LLM_META_NAME;
-    meta.content = UI_LLM_PROTOCOL_VERSION;
+    meta.name = SEAM_META_NAME;
+    meta.content = SEAM_PROTOCOL_VERSION;
     document.head.appendChild(meta);
 
     return () => {
@@ -78,17 +78,17 @@ export function LLMProvider({
     if (!exposeOnWindow || !enabled) return;
 
     const registry = registryRef.current!;
-    window[UI_LLM_WINDOW_KEY] = {
+    window[SEAM_WINDOW_KEY] = {
       getManifest: () => registry.getManifest(),
       getEntry: (id) => registry.getEntry(id),
       findEntries: (query) => registry.findEntries(query),
-      version: UI_LLM_VERSION,
+      version: SEAM_VERSION,
       execute: async (entryId, request) => registry.execute(entryId, request),
       subscribe: (target, callback) => registry.subscribeToEntry(target, callback),
     };
 
     return () => {
-      delete window[UI_LLM_WINDOW_KEY];
+      delete window[SEAM_WINDOW_KEY];
     };
   }, [exposeOnWindow, enabled]);
 

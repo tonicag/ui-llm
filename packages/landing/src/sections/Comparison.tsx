@@ -10,7 +10,7 @@ export function Comparison() {
         <span className="section-label">Comparison</span>
         <h2 className="section-title">How it compares</h2>
         <p className="section-subtitle" style={{ marginBottom: '2.5rem' }}>
-          ui-llm is purpose-built for LLM-UI interaction. Existing tools solve adjacent problems.
+          seam-ui is purpose-built for LLM-UI interaction. Existing tools solve adjacent problems.
         </p>
 
         <div className="card" style={{ overflow: 'auto', padding: 0 }}>
@@ -18,7 +18,7 @@ export function Comparison() {
             <thead>
               <tr>
                 <th style={{ paddingLeft: '1.5rem' }}>Capability</th>
-                <th style={{ color: 'var(--accent)' }}>ui-llm</th>
+                <th style={{ color: 'var(--accent)' }}>seam-ui</th>
                 <th>ARIA</th>
                 <th>data-testid</th>
                 <th>Screenshot AI</th>

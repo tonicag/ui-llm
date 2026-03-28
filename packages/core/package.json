@@ -1,7 +1,7 @@
 {
-  "name": "@ui-llm/core",
+  "name": "@seam-ui/core",
   "version": "0.1.0",
-  "description": "Shared types and constants for ui-llm",
+  "description": "Shared types and constants for seam-ui",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

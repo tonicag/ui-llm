@@ -1,9 +1,9 @@
-# Publishing @ui-llm packages to npm
+# Publishing @seam-ui packages to npm
 
 ## Prerequisites
 
 1. **npm account** — Create one at https://www.npmjs.com/signup
-2. **npm org** — Create the `@ui-llm` organization at https://www.npmjs.com/org/create (free for public packages)
+2. **npm org** — Create the `@seam-ui` organization at https://www.npmjs.com/org/create (free for public packages)
 3. **Login** — Run `npm login` in your terminal
 4. **2FA** — Enable 2FA on your npm account (recommended)
 
@@ -11,16 +11,16 @@
 
 ### 1. Create the npm organization
 
-Go to https://www.npmjs.com/org/create and create `ui-llm`. Add any collaborators.
+Go to https://www.npmjs.com/org/create and create `seam-ui`. Add any collaborators.
 
 ### 2. Verify package names
 
 Each package.json should have the scoped name:
 
 ```
-@ui-llm/core
-@ui-llm/react
-@ui-llm/playwright
+@seam-ui/core
+@seam-ui/react
+@seam-ui/playwright
 ```
 
 ### 3. Set public access
@@ -56,9 +56,9 @@ pnpm -r exec -- npm version patch
 # or: minor, major, prepatch, preminor, premajor
 
 # 3. Publish all packages (in dependency order)
-pnpm --filter @ui-llm/core publish --access public
-pnpm --filter @ui-llm/react publish --access public
-pnpm --filter @ui-llm/playwright publish --access public
+pnpm --filter @seam-ui/core publish --access public
+pnpm --filter @seam-ui/react publish --access public
+pnpm --filter @seam-ui/playwright publish --access public
 
 # 4. Push tags
 git add -A
@@ -85,12 +85,12 @@ Edit `.changeset/config.json`:
   "$schema": "https://unpkg.com/@changesets/config@3.0.0/schema.json",
   "changelog": "@changesets/cli/changelog",
   "commit": false,
-  "fixed": [["@ui-llm/core", "@ui-llm/react", "@ui-llm/playwright"]],
+  "fixed": [["@seam-ui/core", "@seam-ui/react", "@seam-ui/playwright"]],
   "linked": [],
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["@ui-llm/example", "@ui-llm/landing"]
+  "ignore": ["@seam-ui/example", "@seam-ui/landing"]
 }
 ```
 
@@ -172,12 +172,12 @@ Set `NPM_TOKEN` in your repo's Settings > Secrets:
 
 ```bash
 # Check what would be published (dry run)
-pnpm --filter @ui-llm/core publish --dry-run
+pnpm --filter @seam-ui/core publish --dry-run
 
 # Check the published package
-npm info @ui-llm/core
-npm info @ui-llm/react
-npm info @ui-llm/playwright
+npm info @seam-ui/core
+npm info @seam-ui/react
+npm info @seam-ui/playwright
 ```
 
 ## Version strategy

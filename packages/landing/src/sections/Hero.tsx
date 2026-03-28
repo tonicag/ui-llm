@@ -14,7 +14,7 @@ export function Hero() {
             <span style={{ color: 'var(--accent)' }}>between UI and AI</span>
           </h1>
           <p style={{ fontSize: '1.2rem', color: 'var(--text-muted)', maxWidth: 620, margin: '0 auto 2rem', lineHeight: 1.6 }}>
-            ui-llm adds an MCP-like annotation layer to React components so LLMs can
+            seam-ui adds an MCP-like annotation layer to React components so LLMs can
             understand what your UI does. Write Playwright tests in plain English.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
@@ -28,7 +28,7 @@ export function Hero() {
             {
               label: 'Single step',
               filename: 'basic.spec.ts',
-              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/playwright'</span>;
 
 test(<span class="hl-str">'update settings'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
   <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000'</span>);
@@ -44,7 +44,7 @@ test(<span class="hl-str">'update settings'</span>, <span class="hl-kw">async</s
             {
               label: 'Multi-step',
               filename: 'multi-step.spec.ts',
-              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/playwright'</span>;
 
 test(<span class="hl-str">'complete checkout'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
   <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000'</span>);
@@ -60,7 +60,7 @@ test(<span class="hl-str">'complete checkout'</span>, <span class="hl-kw">async<
             {
               label: 'Sequence',
               filename: 'sequence.spec.ts',
-              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/playwright'</span>;
 
 test(<span class="hl-str">'onboarding flow'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
   <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000'</span>);

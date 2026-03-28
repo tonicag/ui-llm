@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://ui-llm.dev/schema/manifest.schema.json",
+  "$id": "https://seam-ui.dev/schema/manifest.schema.json",
   "title": "UILLMManifest",
-  "description": "JSON Schema for the ui-llm manifest protocol, version 1.0.0",
+  "description": "JSON Schema for the seam-ui manifest protocol, version 1.0.0",
   "type": "object",
   "required": ["version", "generatedAt", "pageUrl", "pageTitle", "entries", "scopeTree", "summary"],
   "additionalProperties": false,

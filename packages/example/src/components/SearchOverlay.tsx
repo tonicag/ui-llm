@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLLMAction, useLLMInput, LLMScope } from '@ui-llm/react';
+import { useLLMAction, useLLMInput, LLMScope } from '@seam-ui/react';
 import type { PageId } from '../App';
 
 interface SearchOverlayProps {

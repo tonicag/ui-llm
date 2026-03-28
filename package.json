@@ -1,5 +1,5 @@
 {
-  "name": "ui-llm",
+  "name": "seam-ui",
   "private": true,
   "version": "0.0.0",
   "description": "Semantic UI annotation layer for LLMs",
@@ -7,7 +7,7 @@
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",
     "test": "pnpm -r test",
-    "test:e2e": "pnpm --filter @ui-llm/example test:e2e",
+    "test:e2e": "pnpm --filter @seam-ui/example test:e2e",
     "lint": "pnpm -r lint",
     "clean": "pnpm -r clean"
   },

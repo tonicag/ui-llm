@@ -84,7 +84,7 @@ export interface LLMActionEntry {
   descriptor: LLMActionDescriptor;
   /** CSS selector that uniquely identifies this element */
   selector: string;
-  /** data-llm-id attribute value for reliable targeting */
+  /** data-seam-id attribute value for reliable targeting */
   dataAttribute: string;
   /** Scope path from nested LLMScope components */
   scopePath: ScopePath;
@@ -330,7 +330,7 @@ export interface UILLMWindowBridge {
 
 declare global {
   interface Window {
-    __ui_llm__?: UILLMWindowBridge;
+    __seam__?: UILLMWindowBridge;
   }
 }
 
@@ -343,16 +343,16 @@ export interface UILLMDiscoveryMeta {
   capabilities?: LLMCapabilities;
 }
 
-/** Shape of /.well-known/ui-llm.json */
+/** Shape of /.well-known/seam-ui.json */
 export interface UILLMWellKnown {
   version: string;
-  /** List of paths/pages that support ui-llm */
+  /** List of paths/pages that support seam-ui */
   pages?: Array<{ path: string; description?: string }>;
   capabilities?: LLMCapabilities;
 }
 
 // ============================================================
-// LLM Bridge Types (used by @ui-llm/playwright)
+// LLM Bridge Types (used by @seam-ui/playwright)
 // ============================================================
 
 export interface LLMBridgeRequest {

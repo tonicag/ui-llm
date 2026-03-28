@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { useLLMAction, useLLMInput, LLMScope } from '@ui-llm/react';
+import { useLLMAction, useLLMInput, LLMScope } from '@seam-ui/react';
 import * as s from '../styles';
 
 interface ContactsPageProps {

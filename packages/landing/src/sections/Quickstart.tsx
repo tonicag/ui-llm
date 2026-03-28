@@ -19,10 +19,10 @@ export function Quickstart() {
               <h3 style={{ fontSize: '1.1rem' }}>Install</h3>
             </div>
             <CodeBlock language="bash">
-{`<span class="hl-fn">pnpm</span> add @ui-llm/react @ui-llm/core
+{`<span class="hl-fn">pnpm</span> add @seam-ui/react @seam-ui/core
 
 <span class="hl-cmt"># For testing:</span>
-<span class="hl-fn">pnpm</span> add -D @ui-llm/playwright @playwright/test`}
+<span class="hl-fn">pnpm</span> add -D @seam-ui/playwright @playwright/test`}
             </CodeBlock>
           </div>
 
@@ -33,7 +33,7 @@ export function Quickstart() {
               <h3 style={{ fontSize: '1.1rem' }}>Wrap your app</h3>
             </div>
             <CodeBlock filename="App.tsx">
-{`<span class="hl-kw">import</span> { <span class="hl-fn">LLMProvider</span>, <span class="hl-fn">LLMScope</span> } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/react'</span>;
+{`<span class="hl-kw">import</span> { <span class="hl-fn">LLMProvider</span>, <span class="hl-fn">LLMScope</span> } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/react'</span>;
 
 <span class="hl-kw">function</span> <span class="hl-fn">App</span>() {
   <span class="hl-kw">return</span> (
@@ -57,7 +57,7 @@ export function Quickstart() {
               <h3 style={{ fontSize: '1.1rem' }}>Annotate your components</h3>
             </div>
             <CodeBlock filename="SearchBar.tsx">
-{`<span class="hl-kw">import</span> { <span class="hl-fn">useLLMAction</span>, <span class="hl-fn">useLLMInput</span> } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/react'</span>;
+{`<span class="hl-kw">import</span> { <span class="hl-fn">useLLMAction</span>, <span class="hl-fn">useLLMInput</span> } <span class="hl-kw">from</span> <span class="hl-str">'@seam-ui/react'</span>;
 
 <span class="hl-kw">function</span> <span class="hl-fn">SearchBar</span>() {
   <span class="hl-kw">const</span> [query, setQuery] = useState(<span class="hl-str">''</span>);

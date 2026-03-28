@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { LLMScopeContext, useLLMScopeContext } from '../context';
-import type { ScopePath } from '@ui-llm/core';
+import type { ScopePath } from '@seam-ui/core';
 
 export interface LLMScopeProps {
   /** Human-readable name for this scope */

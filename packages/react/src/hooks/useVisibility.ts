@@ -1,5 +1,5 @@
 import { useEffect, useState, type RefObject } from 'react';
-import type { ElementVisibility } from '@ui-llm/core';
+import type { ElementVisibility } from '@seam-ui/core';
 
 function checkCssVisibility(el: HTMLElement): boolean {
   const style = window.getComputedStyle(el);

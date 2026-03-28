@@ -13,7 +13,7 @@ export function Footer() {
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '3rem' }}>
           <div className="install-box">
             <span className="dollar">$</span>
-            <span>pnpm add @ui-llm/react @ui-llm/core</span>
+            <span>pnpm add @seam-ui/react @seam-ui/core</span>
           </div>
         </div>
 

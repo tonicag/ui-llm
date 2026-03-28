@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 import type { LLMRegistry } from './registry';
-import type { ScopePath } from '@ui-llm/core';
+import type { ScopePath } from '@seam-ui/core';
 
 export interface LLMContextValue {
   registry: LLMRegistry;

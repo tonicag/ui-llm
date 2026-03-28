@@ -1,7 +1,7 @@
 {
-  "name": "@ui-llm/react",
+  "name": "@seam-ui/react",
   "version": "0.1.0",
-  "description": "React hooks and provider for ui-llm semantic annotations",
+  "description": "React hooks and provider for seam-ui semantic annotations",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,7 +25,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@ui-llm/core": "workspace:*"
+    "@seam-ui/core": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18.0.0",

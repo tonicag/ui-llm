@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { useLLMAction, LLMScope } from '@ui-llm/react';
+import { useLLMAction, LLMScope } from '@seam-ui/react';
 import * as s from '../styles';
 
 interface DashboardPageProps {

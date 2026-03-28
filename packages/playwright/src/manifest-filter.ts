@@ -5,7 +5,7 @@ import type {
   LLMInputEntry,
   LLMCapabilities,
   LLMRelation,
-} from '@ui-llm/core';
+} from '@seam-ui/core';
 
 interface FilterOptions {
   /** Only include visible entries */

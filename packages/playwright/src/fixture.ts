@@ -1,6 +1,6 @@
 import { test as base, type Locator } from '@playwright/test';
-import type { UILLMManifest, LLMBridgeConfig, LLMBridgeAction, ExecutionResult } from '@ui-llm/core';
-import { UI_LLM_DATA_ATTRIBUTE } from '@ui-llm/core';
+import type { UILLMManifest, LLMBridgeConfig, LLMBridgeAction, ExecutionResult } from '@seam-ui/core';
+import { SEAM_DATA_ATTRIBUTE } from '@seam-ui/core';
 import { LLMBridge } from './llm-bridge';
 import { ManifestReader } from './manifest-reader';
 import { ActionExecutor, ActionExecutionError } from './executor';
@@ -56,7 +56,7 @@ export interface LLMTestHelper {
   invoke: (description: string, params?: Record<string, unknown>) => Promise<ExecutionResult>;
 
   /**
-   * Check if ui-llm is supported on the current page.
+   * Check if seam-ui is supported on the current page.
    */
   detectSupport: () => Promise<{ supported: boolean; version?: string }>;
 }
@@ -97,7 +97,7 @@ export const test = base.extend<{ llm: LLMTestHelper } & LLMFixtureConfig>({
     const history: LLMBridgeAction[] = [];
 
     const log = (...args: unknown[]) => {
-      if (llmConfig.verbose) console.log('[ui-llm]', ...args);
+      if (llmConfig.verbose) console.log('[seam-ui]', ...args);
     };
 
     const executeAction = async (instruction: string, retryCount = 0): Promise<void> => {
@@ -115,7 +115,7 @@ export const test = base.extend<{ llm: LLMTestHelper } & LLMFixtureConfig>({
           if (retryCount > 0) {
             const manifest2 = await reader.read();
             throw new Error(
-              `ui-llm action failed after retry.\n\n` +
+              `seam-ui action failed after retry.\n\n` +
               `Instruction: "${instruction}"\n\n` +
               `Failed action: ${action.operation} on ${action.entryId}\n` +
               `LLM reasoning: ${action.reasoning}\n` +
@@ -153,7 +153,7 @@ export const test = base.extend<{ llm: LLMTestHelper } & LLMFixtureConfig>({
 
         if (!result.passed) {
           throw new Error(
-            `ui-llm assertion failed: "${assertion}"\n\n` +
+            `seam-ui assertion failed: "${assertion}"\n\n` +
             `Reasoning: ${result.reasoning}\n` +
             `Relevant entries: ${result.relevantEntries.join(', ')}\n\n` +
             `Current manifest state:\n${formatManifestSummary(manifest)}`
@@ -170,7 +170,7 @@ export const test = base.extend<{ llm: LLMTestHelper } & LLMFixtureConfig>({
 
         if (!result.passed) {
           console.warn(
-            `[ui-llm] Soft assertion warning: "${assertion}"\n` +
+            `[seam-ui] Soft assertion warning: "${assertion}"\n` +
             `Reasoning: ${result.reasoning}`
           );
         }
@@ -198,7 +198,7 @@ export const test = base.extend<{ llm: LLMTestHelper } & LLMFixtureConfig>({
             `Available entries:\n${manifest.entries.map(e => `  - ${e.id}: ${e.descriptor.name}`).join('\n')}`
           );
         }
-        return page.locator(`[${UI_LLM_DATA_ATTRIBUTE}="${entry.dataAttribute}"]`);
+        return page.locator(`[${SEAM_DATA_ATTRIBUTE}="${entry.dataAttribute}"]`);
       },
 
       sequence: async (instructions: string[]) => {

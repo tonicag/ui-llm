@@ -7,8 +7,8 @@ import type {
   OnExecuteCallback,
   LLMRelation,
   LLMPermission,
-} from '@ui-llm/core';
-import { UI_LLM_DATA_ATTRIBUTE, generateId } from '@ui-llm/core';
+} from '@seam-ui/core';
+import { SEAM_DATA_ATTRIBUTE, generateId } from '@seam-ui/core';
 import { useLLMContext, useLLMScopeContext } from '../context';
 import { useVisibility } from './useVisibility';
 
@@ -51,8 +51,8 @@ export function useLLMAction<T extends HTMLElement = HTMLElement>(
   useEffect(() => {
     const el = ref.current;
     if (!el || !llmEnabled) return;
-    el.setAttribute(UI_LLM_DATA_ATTRIBUTE, entryIdRef.current);
-    return () => el.removeAttribute(UI_LLM_DATA_ATTRIBUTE);
+    el.setAttribute(SEAM_DATA_ATTRIBUTE, entryIdRef.current);
+    return () => el.removeAttribute(SEAM_DATA_ATTRIBUTE);
   }, [ref, llmEnabled]);
 
   // Register on mount
@@ -72,7 +72,7 @@ export function useLLMAction<T extends HTMLElement = HTMLElement>(
         params: options.params,
         relations: options.relations,
       },
-      selector: `[${UI_LLM_DATA_ATTRIBUTE}="${entryIdRef.current}"]`,
+      selector: `[${SEAM_DATA_ATTRIBUTE}="${entryIdRef.current}"]`,
       dataAttribute: entryIdRef.current,
       scopePath: scopePath as ScopePath,
       state: {

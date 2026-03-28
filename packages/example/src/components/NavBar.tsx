@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLLMAction } from '@ui-llm/react';
+import { useLLMAction } from '@seam-ui/react';
 import type { PageId } from '../App';
 
 interface NavBarProps {
@@ -52,7 +52,7 @@ export function NavBar({ currentPage, onNavigate, onSearchOpen, notificationCoun
       alignItems: 'center',
     }}>
       <strong style={{ marginRight: '1rem', fontSize: '1.1rem', color: '#4a4aff' }}>
-        ui-llm
+        seam-ui
       </strong>
 
       {navActions.map(({ page: p, action }) => (

@@ -13,7 +13,7 @@ export function Architecture() {
         <div className="grid-3">
           <div className="card" style={{ borderColor: 'var(--accent)', borderWidth: 1 }}>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.8rem', color: 'var(--accent)', marginBottom: '0.75rem', fontWeight: 600 }}>
-              @ui-llm/core
+              @seam-ui/core
             </div>
             <h3>Protocol & Types</h3>
             <p style={{ marginBottom: '1rem' }}>
@@ -36,7 +36,7 @@ export function Architecture() {
 
           <div className="card" style={{ borderColor: 'var(--accent-2)', borderWidth: 1 }}>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.8rem', color: 'var(--accent-2)', marginBottom: '0.75rem', fontWeight: 600 }}>
-              @ui-llm/react
+              @seam-ui/react
             </div>
             <h3>React Implementation</h3>
             <p style={{ marginBottom: '1rem' }}>
@@ -59,7 +59,7 @@ export function Architecture() {
 
           <div className="card" style={{ borderColor: 'var(--accent-3)', borderWidth: 1 }}>
             <div style={{ fontFamily: 'var(--mono)', fontSize: '0.8rem', color: 'var(--accent-3)', marginBottom: '0.75rem', fontWeight: 600 }}>
-              @ui-llm/playwright
+              @seam-ui/playwright
             </div>
             <h3>Playwright Integration</h3>
             <p style={{ marginBottom: '1rem' }}>
@@ -91,7 +91,7 @@ export function Architecture() {
             <span style={{ color: 'var(--green)' }}>JSON Manifest</span>
             <br />
             <span style={{ color: 'var(--green)' }}>JSON Manifest</span>
-            <span style={{ color: 'var(--text-dim)' }}> ── window.__ui_llm__ ──&gt; </span>
+            <span style={{ color: 'var(--text-dim)' }}> ── window.__seam__ ──&gt; </span>
             <span style={{ color: 'var(--accent-3)' }}>Playwright</span>
             <span style={{ color: 'var(--text-dim)' }}> ── LLM API ──&gt; </span>
             <span style={{ color: 'var(--orange)' }}>Action Resolution</span>

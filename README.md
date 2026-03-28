@@ -1,11 +1,11 @@
-# ui-llm
+# seam-ui
 
 **The missing semantic layer between UI and AI.**
 
-ui-llm is a protocol and React library that adds MCP-like annotations to your components so LLMs can understand what your UI does, what state it's in, and how to interact with it. Write Playwright tests in plain English.
+seam-ui is a protocol and React library that adds MCP-like annotations to your components so LLMs can understand what your UI does, what state it's in, and how to interact with it. Write Playwright tests in plain English.
 
 ```ts
-import { test } from '@ui-llm/playwright';
+import { test } from '@seam-ui/playwright';
 
 test('user can update settings', async ({ page, llm }) => {
   await page.goto('http://localhost:3000');
@@ -24,27 +24,27 @@ test('user can update settings', async ({ page, llm }) => {
 
 | Package | Description |
 |---|---|
-| [`@ui-llm/core`](./packages/core) | Protocol types, JSON Schema, constants |
-| [`@ui-llm/react`](./packages/react) | React hooks, provider, registry, DevPanel |
-| [`@ui-llm/playwright`](./packages/playwright) | Playwright fixture for natural language testing |
-| [`@ui-llm/example`](./packages/example) | Demo app showcasing all features |
-| [`@ui-llm/landing`](./packages/landing) | Project landing page |
+| [`@seam-ui/core`](./packages/core) | Protocol types, JSON Schema, constants |
+| [`@seam-ui/react`](./packages/react) | React hooks, provider, registry, DevPanel |
+| [`@seam-ui/playwright`](./packages/playwright) | Playwright fixture for natural language testing |
+| [`@seam-ui/example`](./packages/example) | Demo app showcasing all features |
+| [`@seam-ui/landing`](./packages/landing) | Project landing page |
 
 ## Quick Start
 
 ### Install
 
 ```bash
-pnpm add @ui-llm/react @ui-llm/core
+pnpm add @seam-ui/react @seam-ui/core
 
 # For testing:
-pnpm add -D @ui-llm/playwright @playwright/test
+pnpm add -D @seam-ui/playwright @playwright/test
 ```
 
 ### 1. Wrap your app
 
 ```tsx
-import { LLMProvider, LLMScope } from '@ui-llm/react';
+import { LLMProvider, LLMScope } from '@seam-ui/react';
 
 function App() {
   return (
@@ -63,7 +63,7 @@ function App() {
 ### 2. Annotate components
 
 ```tsx
-import { useLLMAction, useLLMInput } from '@ui-llm/react';
+import { useLLMAction, useLLMInput } from '@seam-ui/react';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
@@ -93,7 +93,7 @@ function SearchBar() {
 ### 3. Write tests in English
 
 ```ts
-import { test, expect } from '@ui-llm/playwright';
+import { test, expect } from '@seam-ui/playwright';
 
 test.use({
   llmConfig: {
@@ -271,7 +271,7 @@ Actions can be invoked programmatically via the window bridge. No Playwright nee
 
 ```ts
 // From browser console or any agent:
-const result = await window.__ui_llm__.execute(entryId, {
+const result = await window.__seam__.execute(entryId, {
   operation: 'invoke',
   params: { enabled: true },
 });
@@ -283,7 +283,7 @@ const result = await window.__ui_llm__.execute(entryId, {
 Subscribe to real-time state changes.
 
 ```ts
-window.__ui_llm__.subscribe('*', (event) => {
+window.__seam__.subscribe('*', (event) => {
   console.log(event.type, event.entryId);
   // 'stateChange' | 'valueChange' | 'visibilityChange' | 'removed'
 });
@@ -294,7 +294,7 @@ window.__ui_llm__.subscribe('*', (event) => {
 Drop-in debug panel for development.
 
 ```tsx
-import { LLMDevPanel } from '@ui-llm/react';
+import { LLMDevPanel } from '@seam-ui/react';
 
 // Add anywhere inside LLMProvider
 <LLMDevPanel />
@@ -304,7 +304,7 @@ Shows live entries, state, scope tree, and highlights elements on hover.
 
 ### Discovery
 
-LLMProvider auto-injects `<meta name="ui-llm" content="1.0.0">` for agent discovery.
+LLMProvider auto-injects `<meta name="seam-ui" content="1.0.0">` for agent discovery.
 
 ```ts
 // In Playwright:
@@ -323,7 +323,7 @@ const { supported, version } = await llm.detectSupport();
 | `llm.invoke(name, params)` | Invoke an action directly with parameters |
 | `llm.navigate(routeName)` | Navigate to a declared route |
 | `llm.getManifest()` | Get the raw manifest |
-| `llm.detectSupport()` | Check if page supports ui-llm |
+| `llm.detectSupport()` | Check if page supports seam-ui |
 
 ### Configuration
 
@@ -344,18 +344,18 @@ test.use({
 
 ```bash
 # Clone and install
-git clone https://github.com/your-username/ui-llm.git
-cd ui-llm
+git clone https://github.com/your-username/seam-ui.git
+cd seam-ui
 pnpm install
 
 # Build all packages
 pnpm build
 
 # Run the example app
-pnpm --filter @ui-llm/example dev
+pnpm --filter @seam-ui/example dev
 
 # Run the landing page
-pnpm --filter @ui-llm/landing dev
+pnpm --filter @seam-ui/landing dev
 
 # Run e2e tests (requires OPENROUTER_API_KEY)
 cp .env.example .env  # add your key
@@ -364,9 +364,9 @@ pnpm test:e2e
 
 ## Protocol
 
-ui-llm is protocol-first. The manifest schema is defined as a [JSON Schema](./packages/core/schema/manifest.schema.json) that any framework can implement. The React package is one implementation — Vue, Svelte, and vanilla JS implementations can follow the same spec.
+seam-ui is protocol-first. The manifest schema is defined as a [JSON Schema](./packages/core/schema/manifest.schema.json) that any framework can implement. The React package is one implementation — Vue, Svelte, and vanilla JS implementations can follow the same spec.
 
-The manifest is exposed at `window.__ui_llm__` and includes:
+The manifest is exposed at `window.__seam__` and includes:
 
 - **Entries**: actions and inputs with name, description, state, visibility, params, relations, permissions
 - **Scope tree**: hierarchical grouping of elements

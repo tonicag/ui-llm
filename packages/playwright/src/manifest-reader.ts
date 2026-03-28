@@ -1,17 +1,17 @@
 import type { Page } from '@playwright/test';
-import type { UILLMManifest, LLMEntryEvent } from '@ui-llm/core';
-import { UI_LLM_WINDOW_KEY, UI_LLM_META_NAME } from '@ui-llm/core';
+import type { UILLMManifest, LLMEntryEvent } from '@seam-ui/core';
+import { SEAM_WINDOW_KEY, SEAM_META_NAME } from '@seam-ui/core';
 
 export class ManifestReader {
   constructor(private page: Page) {}
 
-  /** Check if the page declares ui-llm support via meta tag */
+  /** Check if the page declares seam-ui support via meta tag */
   async detectSupport(): Promise<{ supported: boolean; version?: string }> {
     try {
       const version = await this.page.evaluate((metaName: string) => {
         const meta = document.querySelector(`meta[name="${metaName}"]`);
         return meta?.getAttribute('content') ?? null;
-      }, UI_LLM_META_NAME);
+      }, SEAM_META_NAME);
 
       return { supported: version !== null, version: version ?? undefined };
     } catch {
@@ -22,18 +22,18 @@ export class ManifestReader {
   async read(): Promise<UILLMManifest> {
     await this.page.waitForFunction(
       (key: string) => (window as any)[key] !== undefined,
-      UI_LLM_WINDOW_KEY,
+      SEAM_WINDOW_KEY,
       { timeout: 10_000 }
     );
 
     const manifest = await this.page.evaluate((key: string) => {
       const bridge = (window as any)[key];
       return bridge.getManifest();
-    }, UI_LLM_WINDOW_KEY);
+    }, SEAM_WINDOW_KEY);
 
     if (!manifest) {
       throw new Error(
-        'ui-llm manifest is empty. Ensure <LLMProvider> is mounted and components are registered.'
+        'seam-ui manifest is empty. Ensure <LLMProvider> is mounted and components are registered.'
       );
     }
 
@@ -45,7 +45,7 @@ export class ManifestReader {
     target: string,
     callback: (event: LLMEntryEvent) => void,
   ): Promise<() => Promise<void>> {
-    const callbackName = `__ui_llm_event_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
+    const callbackName = `__seam_event_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`;
     await this.page.exposeFunction(callbackName, callback);
 
     await this.page.evaluate(
@@ -57,7 +57,7 @@ export class ManifestReader {
           });
         }
       },
-      { key: UI_LLM_WINDOW_KEY, target, callbackName },
+      { key: SEAM_WINDOW_KEY, target, callbackName },
     );
 
     return async () => {

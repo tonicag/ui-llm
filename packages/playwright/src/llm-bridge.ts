@@ -4,7 +4,7 @@ import type {
   LLMBridgeRequest,
   LLMBridgeAction,
   LLMBridgeAssertionResult,
-} from '@ui-llm/core';
+} from '@seam-ui/core';
 import { filterManifestForLLM } from './manifest-filter';
 
 export class LLMBridge {
@@ -21,7 +21,7 @@ export class LLMBridge {
     const response = await this.callLLM(systemPrompt, userPrompt);
 
     if (this.config.verbose) {
-      console.log('[ui-llm] LLM action response:', response);
+      console.log('[seam-ui] LLM action response:', response);
     }
 
     return this.parseActionResponse(response);
@@ -41,7 +41,7 @@ export class LLMBridge {
     const response = await this.callLLM(systemPrompt, userPrompt);
 
     if (this.config.verbose) {
-      console.log('[ui-llm] LLM assertion response:', response);
+      console.log('[seam-ui] LLM assertion response:', response);
     }
 
     return this.parseAssertionResponse(response);

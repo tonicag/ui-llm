@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLLMAction, LLMScope } from '@ui-llm/react';
+import { useLLMAction, LLMScope } from '@seam-ui/react';
 import type { PageId } from '../App';
 import * as s from '../styles';
 
@@ -32,14 +32,14 @@ export function HomePage({ onNavigate }: HomePageProps) {
   return (
     <div>
       <div style={{ marginBottom: '2rem' }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>ui-llm Demo</h1>
+        <h1 style={{ fontSize: '2rem', marginBottom: '0.5rem' }}>seam-ui Demo</h1>
         <p style={{ color: '#666', fontSize: '1.05rem', lineHeight: 1.5 }}>
           A semantic annotation layer for React components that lets LLMs understand and interact with your UI.
-          Open the DevPanel (bottom-right) or run <code style={{ background: '#eee', padding: '2px 6px', borderRadius: 4 }}>window.__ui_llm__.getManifest()</code> in the console.
+          Open the DevPanel (bottom-right) or run <code style={{ background: '#eee', padding: '2px 6px', borderRadius: 4 }}>window.__seam__.getManifest()</code> in the console.
         </p>
       </div>
 
-      <LLMScope name="Feature Cards" description="Cards showcasing the main features of ui-llm">
+      <LLMScope name="Feature Cards" description="Cards showcasing the main features of seam-ui">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1rem' }}>
           {features.map(f => (
             <FeatureCard key={f.title} {...f} onNavigate={onNavigate} />

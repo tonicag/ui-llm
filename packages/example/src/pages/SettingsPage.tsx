@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LLMScope, useLLMAction, useLLMInput } from '@ui-llm/react';
+import { LLMScope, useLLMAction, useLLMInput } from '@seam-ui/react';
 import * as s from '../styles';
 
 interface SettingsPageProps {
