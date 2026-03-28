@@ -1,6 +1,6 @@
 {
   "name": "@seam-ui/react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React hooks and provider for seam-ui semantic annotations",
   "type": "module",
   "main": "./dist/index.js",

@@ -65,7 +65,9 @@ function readSelectOptions(el: HTMLElement | null): Array<{ value: string; label
 export function useLLMInput<T extends HTMLElement = HTMLInputElement>(
   options: UseLLMInputOptions
 ): UseLLMInputReturn<T> {
-  const { registry, enabled: llmEnabled } = useLLMContext();
+  const ctx = useLLMContext();
+  const registry = ctx?.registry;
+  const llmEnabled = ctx?.enabled ?? false;
   const { path: scopePath } = useLLMScopeContext();
   const internalRef = useRef<T>(null);
   const ref = (options.ref as RefObject<T | null>) ?? internalRef;
@@ -83,7 +85,7 @@ export function useLLMInput<T extends HTMLElement = HTMLInputElement>(
 
   // Register on mount
   useEffect(() => {
-    if (!llmEnabled) return;
+    if (!llmEnabled || !registry) return;
 
     const el = ref.current;
     const inputEl = el as unknown as HTMLInputElement | null;
@@ -126,7 +128,7 @@ export function useLLMInput<T extends HTMLElement = HTMLInputElement>(
 
   // Update value and state reactively
   useEffect(() => {
-    if (!llmEnabled) return;
+    if (!llmEnabled || !registry) return;
     const el = ref.current;
     const inputEl = el as unknown as HTMLInputElement | null;
 
@@ -148,7 +150,7 @@ export function useLLMInput<T extends HTMLElement = HTMLInputElement>(
 
   // Update descriptor
   useEffect(() => {
-    if (!llmEnabled) return;
+    if (!llmEnabled || !registry) return;
     registry.updateDescriptor(entryIdRef.current, {
       name: options.name,
       description: options.description,

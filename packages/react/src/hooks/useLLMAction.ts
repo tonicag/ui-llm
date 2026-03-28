@@ -39,7 +39,9 @@ export interface UseLLMActionReturn<T extends HTMLElement = HTMLElement> {
 export function useLLMAction<T extends HTMLElement = HTMLElement>(
   options: UseLLMActionOptions
 ): UseLLMActionReturn<T> {
-  const { registry, enabled: llmEnabled } = useLLMContext();
+  const ctx = useLLMContext();
+  const registry = ctx?.registry;
+  const llmEnabled = ctx?.enabled ?? false;
   const { path: scopePath } = useLLMScopeContext();
   const internalRef = useRef<T>(null);
   const ref = (options.ref as RefObject<T | null>) ?? internalRef;
@@ -57,7 +59,7 @@ export function useLLMAction<T extends HTMLElement = HTMLElement>(
 
   // Register on mount
   useEffect(() => {
-    if (!llmEnabled) return;
+    if (!llmEnabled || !registry) return;
 
     const el = ref.current;
     const entry: LLMActionEntry = {
@@ -96,13 +98,13 @@ export function useLLMAction<T extends HTMLElement = HTMLElement>(
 
   // Register onExecute callback
   useEffect(() => {
-    if (!llmEnabled || !options.onExecute) return;
+    if (!llmEnabled || !registry || !options.onExecute) return;
     return registry.registerExecuteCallback(entryIdRef.current, options.onExecute);
   }, [options.onExecute, llmEnabled]);
 
   // Update state reactively
   useEffect(() => {
-    if (!llmEnabled) return;
+    if (!llmEnabled || !registry) return;
     registry.updateState(entryIdRef.current, {
       visibility,
       enabled: options.enabled ?? true,
@@ -121,7 +123,7 @@ export function useLLMAction<T extends HTMLElement = HTMLElement>(
 
   // Update descriptor when it changes
   useEffect(() => {
-    if (!llmEnabled) return;
+    if (!llmEnabled || !registry) return;
     registry.updateDescriptor(entryIdRef.current, {
       name: options.name,
       description: options.description,

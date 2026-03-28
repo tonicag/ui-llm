@@ -14,15 +14,13 @@ export interface LLMScopeContextValue {
 export const LLMContext = createContext<LLMContextValue | null>(null);
 export const LLMScopeContext = createContext<LLMScopeContextValue>({ path: [] });
 
-export function useLLMContext(): LLMContextValue {
-  const ctx = useContext(LLMContext);
-  if (!ctx) {
-    throw new Error(
-      'useLLMAction/useLLMInput must be used within an <LLMProvider>. ' +
-      'Wrap your app root with <LLMProvider>.'
-    );
-  }
-  return ctx;
+/**
+ * Returns the LLM context or null if not within an LLMProvider.
+ * Returns null during SSR/prerendering when providers aren't mounted.
+ * Hooks use this to gracefully no-op instead of throwing.
+ */
+export function useLLMContext(): LLMContextValue | null {
+  return useContext(LLMContext);
 }
 
 export function useLLMScopeContext(): LLMScopeContextValue {
