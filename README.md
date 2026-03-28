@@ -114,6 +114,30 @@ test('search for products', async ({ page, llm }) => {
 });
 ```
 
+### Multi-step instructions
+
+You can pack multiple actions into a single `do()` call, or use `sequence()` for flows that change the page between steps:
+
+```ts
+// Multi-step: LLM resolves all actions at once (best for 2-3 related actions)
+await llm.do('fill in name "Eve", email "eve@test.com", role "Engineer", then submit');
+
+// Sequence: re-reads the manifest between each step (best for 4+ steps or page changes)
+await llm.sequence([
+  'open the search overlay',
+  'search for "Settings"',
+  'click the Settings result',
+  'change display name to "Bob" and email to "bob@test.com"',
+  'click save settings',
+]);
+
+await llm.expect('the display name is "Bob"');
+
+// Mix freely — batch related fills, separate page-changing steps
+await llm.do('go to the dashboard and set the time range to 90 days');
+await llm.expect('the 90 day range is selected');
+```
+
 ## Features
 
 ### Hook-based annotation

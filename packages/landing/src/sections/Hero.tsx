@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeBlock } from '../components/CodeBlock';
+import { TabbedCode } from '../components/CodeBlock';
 
 export function Hero() {
   return (
@@ -23,11 +23,14 @@ export function Hero() {
           </div>
         </div>
 
-        <div style={{ maxWidth: 700, margin: '0 auto' }}>
-          <CodeBlock filename="settings.spec.ts">
-{`<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+        <div style={{ maxWidth: 750, margin: '0 auto' }}>
+          <TabbedCode tabs={[
+            {
+              label: 'Single step',
+              filename: 'basic.spec.ts',
+              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
 
-test(<span class="hl-str">'user can update settings'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
+test(<span class="hl-str">'update settings'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
   <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000'</span>);
 
   <span class="hl-kw">await</span> llm.<span class="hl-fn">do</span>(<span class="hl-str">'click Settings in the navbar'</span>);
@@ -35,10 +38,47 @@ test(<span class="hl-str">'user can update settings'</span>, <span class="hl-kw"
   <span class="hl-kw">await</span> llm.<span class="hl-fn">do</span>(<span class="hl-str">'toggle dark mode on'</span>);
   <span class="hl-kw">await</span> llm.<span class="hl-fn">do</span>(<span class="hl-str">'click save settings'</span>);
 
-  <span class="hl-kw">await</span> llm.<span class="hl-fn">expect</span>(<span class="hl-str">'the display name contains "Alice"'</span>);
   <span class="hl-kw">await</span> llm.<span class="hl-fn">expect</span>(<span class="hl-str">'dark mode is on'</span>);
-});`}
-          </CodeBlock>
+});`,
+            },
+            {
+              label: 'Multi-step',
+              filename: 'multi-step.spec.ts',
+              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+
+test(<span class="hl-str">'complete checkout'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
+  <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000'</span>);
+
+  <span class="hl-cmt">// Multi-step: the LLM resolves all actions at once</span>
+  <span class="hl-kw">await</span> llm.<span class="hl-fn">do</span>(<span class="hl-str">'go to contacts, add a new contact named '</span>
+    + <span class="hl-str">'"Eve" with email "eve@test.com" as an Engineer, '</span>
+    + <span class="hl-str">'then submit the form'</span>);
+
+  <span class="hl-kw">await</span> llm.<span class="hl-fn">expect</span>(<span class="hl-str">'Eve is in the contact list'</span>);
+});`,
+            },
+            {
+              label: 'Sequence',
+              filename: 'sequence.spec.ts',
+              code: `<span class="hl-kw">import</span> { test } <span class="hl-kw">from</span> <span class="hl-str">'@ui-llm/playwright'</span>;
+
+test(<span class="hl-str">'onboarding flow'</span>, <span class="hl-kw">async</span> ({ page, <span class="hl-prop">llm</span> }) => {
+  <span class="hl-kw">await</span> page.goto(<span class="hl-str">'http://localhost:3000'</span>);
+
+  <span class="hl-cmt">// sequence() re-reads the manifest after each step</span>
+  <span class="hl-cmt">// so the LLM always sees the latest UI state</span>
+  <span class="hl-kw">await</span> llm.<span class="hl-fn">sequence</span>([
+    <span class="hl-str">'click Get Started on the home page'</span>,
+    <span class="hl-str">'fill in name "Alice", email "alice@co.com"'</span>,
+    <span class="hl-str">'select the Pro plan'</span>,
+    <span class="hl-str">'toggle on email notifications'</span>,
+    <span class="hl-str">'click Complete Setup'</span>,
+  ]);
+
+  <span class="hl-kw">await</span> llm.<span class="hl-fn">expect</span>(<span class="hl-str">'the welcome dashboard is visible'</span>);
+});`,
+            },
+          ]} />
         </div>
       </div>
     </section>

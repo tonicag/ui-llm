@@ -30,11 +30,12 @@ export function Nav() {
       transition: 'all 0.3s',
     }}>
       <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <a href="#" style={{ fontWeight: 800, fontSize: '1.15rem', color: 'var(--text)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+        <a href="#" style={{ fontWeight: 800, fontSize: '1.15rem', color: 'var(--text)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 }}>
           <span style={{ color: 'var(--accent)' }}>ui</span>-llm
         </a>
 
-        <div style={{ display: 'flex', gap: '0.25rem', alignItems: 'center' }}>
+        {/* Links hidden on mobile via CSS class */}
+        <div className="nav-links">
           {links.map(l => (
             <a
               key={l.href}
@@ -53,10 +54,11 @@ export function Nav() {
               {l.label}
             </a>
           ))}
-          <a href="#quickstart" className="btn btn-primary" style={{ marginLeft: '0.5rem', padding: '0.45rem 1rem', fontSize: '0.85rem' }}>
-            Get Started
-          </a>
         </div>
+
+        <a href="#quickstart" className="btn btn-primary" style={{ padding: '0.45rem 1rem', fontSize: '0.85rem', flexShrink: 0 }}>
+          Get Started
+        </a>
       </div>
     </nav>
   );

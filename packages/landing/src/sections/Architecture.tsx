@@ -81,8 +81,8 @@ export function Architecture() {
           </div>
         </div>
 
-        {/* Flow diagram */}
-        <div className="card" style={{ marginTop: '2rem', textAlign: 'center', padding: '2.5rem' }}>
+        {/* Flow diagram — hidden on mobile via CSS */}
+        <div className="card arch-flow" style={{ marginTop: '2rem', textAlign: 'center', padding: '2.5rem' }}>
           <div style={{ fontFamily: 'var(--mono)', fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 2.2 }}>
             <span style={{ color: 'var(--accent-2)' }}>React Component</span>
             <span style={{ color: 'var(--text-dim)' }}> ── useLLMAction ──&gt; </span>
