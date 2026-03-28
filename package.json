@@ -1,0 +1,22 @@
+{
+  "name": "ui-llm",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Semantic UI annotation layer for LLMs",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm -r --parallel dev",
+    "test": "pnpm -r test",
+    "test:e2e": "pnpm --filter @ui-llm/example test:e2e",
+    "lint": "pnpm -r lint",
+    "clean": "pnpm -r clean"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}

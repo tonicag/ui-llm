@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ui-llm.dev/schema/manifest.schema.json",
+  "title": "UILLMManifest",
+  "description": "JSON Schema for the ui-llm manifest protocol, version 1.0.0",
+  "type": "object",
+  "required": ["version", "generatedAt", "pageUrl", "pageTitle", "entries", "scopeTree", "summary"],
+  "additionalProperties": false,
+  "properties": {
+    "version": { "type": "string", "const": "1.0.0" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "pageUrl": { "type": "string" },
+    "pageTitle": { "type": "string" },
+    "entries": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/LLMEntry" }
+    },
+    "scopeTree": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/LLMScopeNode" }
+    },
+    "summary": { "$ref": "#/$defs/ManifestSummary" },
+    "routes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/LLMRoute" }
+    },
+    "currentRoute": { "$ref": "#/$defs/LLMCurrentRoute" }
+  },
+  "$defs": {
+    "EntryId": { "type": "string" },
+    "ScopePath": { "type": "array", "items": { "type": "string" } },
+    "ElementVisibility": {
+      "type": "object",
+      "required": ["inViewport", "cssVisible", "visible"],
+      "properties": {
+        "inViewport": { "type": "boolean" },
+        "cssVisible": { "type": "boolean" },
+        "visible": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "ElementState": {
+      "type": "object",
+      "required": ["visibility", "enabled", "loading", "dynamicState"],
+      "properties": {
+        "visibility": { "$ref": "#/$defs/ElementVisibility" },
+        "enabled": { "type": "boolean" },
+        "loading": { "type": "boolean" },
+        "dynamicState": { "type": "object" }
+      },
+      "additionalProperties": false
+    },
+    "LLMParamDefinition": {
+      "type": "object",
+      "required": ["type", "description"],
+      "properties": {
+        "type": { "type": "string", "enum": ["string", "number", "boolean"] },
+        "description": { "type": "string" },
+        "enum": { "type": "array" },
+        "default": {},
+        "required": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "LLMRelation": {
+      "type": "object",
+      "required": ["type", "targetId"],
+      "properties": {
+        "type": { "type": "string", "enum": ["submits", "controls", "validates", "triggers"] },
+        "targetId": { "$ref": "#/$defs/EntryId" },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "LLMPermission": {
+      "type": "string",
+      "enum": ["read", "execute", "navigate", "fillInputs", "dangerZone"]
+    },
+    "LLMActionDescriptor": {
+      "type": "object",
+      "required": ["name", "description"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "group": { "type": "string" },
+        "shortcut": { "type": "string" },
+        "dynamicState": { "type": "object" },
+        "params": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/LLMParamDefinition" }
+        },
+        "relations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/LLMRelation" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "LLMActionEntry": {
+      "type": "object",
+      "required": ["id", "kind", "descriptor", "selector", "dataAttribute", "scopePath", "state", "tagName", "role", "lastUpdated"],
+      "properties": {
+        "id": { "$ref": "#/$defs/EntryId" },
+        "kind": { "type": "string", "const": "action" },
+        "descriptor": { "$ref": "#/$defs/LLMActionDescriptor" },
+        "selector": { "type": "string" },
+        "dataAttribute": { "type": "string" },
+        "scopePath": { "$ref": "#/$defs/ScopePath" },
+        "state": { "$ref": "#/$defs/ElementState" },
+        "tagName": { "type": "string" },
+        "role": { "type": ["string", "null"] },
+        "lastUpdated": { "type": "number" },
+        "permission": { "$ref": "#/$defs/LLMPermission" }
+      },
+      "additionalProperties": false
+    },
+    "LLMInputValidation": {
+      "type": "object",
+      "required": ["required", "validationMessage", "valid"],
+      "properties": {
+        "required": { "type": "boolean" },
+        "pattern": { "type": "string" },
+        "minLength": { "type": "number" },
+        "maxLength": { "type": "number" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "validationMessage": { "type": ["string", "null"] },
+        "valid": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "LLMInputDescriptor": {
+      "type": "object",
+      "required": ["name", "description", "inputType"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "inputType": {
+          "type": "string",
+          "enum": [
+            "text", "email", "password", "number", "tel", "url",
+            "search", "date", "time", "datetime-local",
+            "textarea", "select", "checkbox", "radio",
+            "file", "range", "color"
+          ]
+        },
+        "dynamicState": { "type": "object" },
+        "relations": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/LLMRelation" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "LLMInputEntry": {
+      "type": "object",
+      "required": ["id", "kind", "descriptor", "selector", "dataAttribute", "scopePath", "state", "tagName", "role", "lastUpdated", "currentValue", "placeholder", "validation"],
+      "properties": {
+        "id": { "$ref": "#/$defs/EntryId" },
+        "kind": { "type": "string", "const": "input" },
+        "descriptor": { "$ref": "#/$defs/LLMInputDescriptor" },
+        "selector": { "type": "string" },
+        "dataAttribute": { "type": "string" },
+        "scopePath": { "$ref": "#/$defs/ScopePath" },
+        "state": { "$ref": "#/$defs/ElementState" },
+        "tagName": { "type": "string" },
+        "role": { "type": ["string", "null"] },
+        "lastUpdated": { "type": "number" },
+        "currentValue": {},
+        "placeholder": { "type": ["string", "null"] },
+        "options": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["value", "label"],
+            "properties": {
+              "value": { "type": "string" },
+              "label": { "type": "string" },
+              "disabled": { "type": "boolean" }
+            },
+            "additionalProperties": false
+          }
+        },
+        "validation": { "$ref": "#/$defs/LLMInputValidation" },
+        "permission": { "$ref": "#/$defs/LLMPermission" }
+      },
+      "additionalProperties": false
+    },
+    "LLMEntry": {
+      "oneOf": [
+        { "$ref": "#/$defs/LLMActionEntry" },
+        { "$ref": "#/$defs/LLMInputEntry" }
+      ]
+    },
+    "LLMScopeDescriptor": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "additionalProperties": false
+    },
+    "LLMScopeNode": {
+      "type": "object",
+      "required": ["descriptor", "path", "entries", "children"],
+      "properties": {
+        "descriptor": { "$ref": "#/$defs/LLMScopeDescriptor" },
+        "path": { "$ref": "#/$defs/ScopePath" },
+        "entries": { "type": "array", "items": { "$ref": "#/$defs/EntryId" } },
+        "children": { "type": "array", "items": { "$ref": "#/$defs/LLMScopeNode" } }
+      },
+      "additionalProperties": false
+    },
+    "LLMCapabilities": {
+      "type": "object",
+      "required": ["read", "execute", "navigate", "fillInputs", "dangerZone"],
+      "properties": {
+        "read": { "type": "boolean" },
+        "execute": { "type": "boolean" },
+        "navigate": { "type": "boolean" },
+        "fillInputs": { "type": "boolean" },
+        "dangerZone": { "type": "boolean" }
+      },
+      "additionalProperties": false
+    },
+    "ManifestSummary": {
+      "type": "object",
+      "required": ["totalActions", "totalInputs", "visibleActions", "visibleInputs", "enabledActions", "scopes"],
+      "properties": {
+        "totalActions": { "type": "integer" },
+        "totalInputs": { "type": "integer" },
+        "visibleActions": { "type": "integer" },
+        "visibleInputs": { "type": "integer" },
+        "enabledActions": { "type": "integer" },
+        "scopes": { "type": "integer" },
+        "capabilities": { "$ref": "#/$defs/LLMCapabilities" }
+      },
+      "additionalProperties": false
+    },
+    "LLMRoute": {
+      "type": "object",
+      "required": ["path", "name", "description"],
+      "properties": {
+        "path": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "params": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/LLMParamDefinition" }
+        }
+      },
+      "additionalProperties": false
+    },
+    "LLMCurrentRoute": {
+      "type": "object",
+      "required": ["path", "name"],
+      "properties": {
+        "path": { "type": "string" },
+        "name": { "type": "string" },
+        "params": {
+          "type": "object",
+          "additionalProperties": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
